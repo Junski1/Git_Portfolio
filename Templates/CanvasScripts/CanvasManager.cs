@@ -36,6 +36,7 @@ public class CanvasManager : MonoBehaviour
 
     private void Awake()
     {
+        //Event to show wanteed canvas it also deactivates the previous canvas if it has the same type
         ShowCanvas.AddListener((targetCanvas) =>
         {
             if (string.IsNullOrEmpty(targetCanvas))
@@ -44,9 +45,12 @@ public class CanvasManager : MonoBehaviour
                 return;
             }
 
+            //Goes through every canvasobject
             foreach (CanvasObject canvasObject in canvasObjects)
+            {
                 if (canvasObject.CanvasName == targetCanvas)
                 {
+                    //Checks the type of the CanvasObject, Deactivates previous object of same type and activates it
                     switch (canvasObject.CanvasType)
                     {
                         default:
@@ -86,7 +90,8 @@ public class CanvasManager : MonoBehaviour
                     return;
                 }
 
-            Debug.LogWarning($"Could not find canvas object \"{targetCanvas}\"");
+                Debug.LogWarning($"Could not find canvas object \"{targetCanvas}\"");
+            }
         });
 
         SludgeNetworkManager.OnClientConnected.AddListener(() =>
@@ -104,8 +109,10 @@ public class CanvasManager : MonoBehaviour
             ShowCanvas.Invoke(offlineCanvasName);
         });
 
+        //used to close a canvasObject => exiting Pause Menu
         CloseCanvas.AddListener((canvasType) =>
         {
+
             switch (canvasType)
             {
                 default:
@@ -139,6 +146,7 @@ public class CanvasManager : MonoBehaviour
         });
     }
 
+    //Activates/Deactivates Wanted canvasObjects
     private void Start()
     {
         foreach (CanvasObject canvasObject in canvasObjects)
