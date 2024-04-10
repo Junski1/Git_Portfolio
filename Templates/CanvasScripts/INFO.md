@@ -1,3 +1,5 @@
+#CanvasScripts
+
 Here are scripts to easily control canvas and its panels in Unity in the same scene.
 
 Usage:
