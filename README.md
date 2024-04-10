@@ -1,2 +1,2 @@
 # Git_Portfolio
- Here are some simple and not so simple scripts and exercises
+This repositorycontains some simple scripts and exercises
